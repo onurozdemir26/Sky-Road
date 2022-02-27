@@ -7,10 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    // private Score ScoreScript;
     int maxPlatform = 0;
     public GameOverScreen GameOverScreen;
-    //public GameOver GameOver;
     public ParticleSystem explosionParticle;
     public AudioClip jumpSound;
     public AudioClip crashSound;
@@ -32,7 +30,7 @@ public class PlayerController : MonoBehaviour
     private double screenWidht;
     Vector3 firstTouch;
     Vector3 lastTouch;
-    
+
 
     void Start()
     {
@@ -47,63 +45,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (gameOver == false)
-        {
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Stationary && isOnGround)
-            {
-                Vector2 touchPosition = Input.GetTouch(0).position;
-                screenWidht = Screen.width / 2;
 
-                if (touchPosition.x < screenWidht)
-                {
-                    RunCharacter(1);
-                    Debug.Log("Left");
-                }
-                else if (touchPosition.x > screenWidht)
-                {
-                    RunCharacter(-1);
-                    Debug.Log("Right");
-                }
-            }
-            if (Input.touchCount == 1)
-            {
-                Touch touch = Input.GetTouch(0);
-
-                if (touch.phase == TouchPhase.Began)
-                {
-                    firstTouch = touch.position;
-                    lastTouch = touch.position;
-                }
-                else if (touch.phase == TouchPhase.Moved)
-                {
-                    lastTouch = touch.position;
-                }
-                else if (touch.phase == TouchPhase.Ended)
-                {
-                    lastTouch = touch.position;
-                    if (lastTouch.y > firstTouch.y && isOnGround)
-                    {
-
-                        playerRb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-                        isOnGround = false;
-                        playerAnim.SetBool("Jump", true); ;
-                        playerAudio.PlayOneShot(jumpSound, 1.0f);
-                        lastTouch = Vector3.zero;
-
-
-
-                    }
-                }
-            }
-        }
-        else
-        {
-
-        }*/
-
-        
-        //////////////////////////////////////////////////////////////////////////////
-        //transform.Translate(1*Time.deltaTime*horizontalInput*sidewaysspeed, 0, 0);
         transform.Translate(Vector3.right * Time.deltaTime * sidewaysspeed * horizontalInput);
         if (transform.position.x < -xRangerz)
         {
@@ -117,18 +59,11 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += transform.forward * forwardspeed * Time.deltaTime;
             horizontalInput = SimpleInput.GetAxis("Horizontal");
-            transform.Translate(1*Time.deltaTime*horizontalInput*sidewaysspeed, 0, 0);
+            transform.Translate(1 * Time.deltaTime * horizontalInput * sidewaysspeed, 0, 0);
         }
-        else{
-
-        }
-
 
     }
-    /*public void RunCharacter(float horýzontalInput)
-    {
-        playerRb.AddForce(new Vector3(horýzontalInput * sidewaysspeed , 0));
-    }*/
+
     public void OnCollisionEnter(Collision collision)
     {
 
@@ -146,7 +81,6 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetInteger("DeathType", 1);
             explosionParticle.Play();
             playerAudio.PlayOneShot(crashSound, 1.0f);
-            //SceneManager.LoadScene("Game Over");
             GameOverScreen.Setup(maxPlatform);
         }
     }
@@ -162,25 +96,17 @@ public class PlayerController : MonoBehaviour
                 playerAnim.SetTrigger("Jump");
                 playerAudio.PlayOneShot(jumpSound, 1.0f);
 
-
-
             }
         }
-        else
-        {
-
-        }
+        
     }
     public void Horizontal()
     {
         if (gameOver == false)
         {
             horizontalInput = SimpleInput.GetAxis("Horizontal");
-            transform.Translate(1*Time.deltaTime*horizontalInput*sidewaysspeed, 0, 0);
+            transform.Translate(1 * Time.deltaTime * horizontalInput * sidewaysspeed, 0, 0);
         }
-        else
-        {
-
-        }
+        
     }
 }

@@ -7,9 +7,6 @@ public class SpawnManager : MonoBehaviour
     
     public GameObject[] animalPrefaps;
     public int animalIndex;
-    /*private float spawnRangeX = 12;
-    private float spawnPosZ = 20;
-    private float startDelay = 2;*/
     
     void Start()
     {
